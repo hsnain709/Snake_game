@@ -15,10 +15,16 @@ grid_size = 30
 board_size = cell_size * grid_size
 
 high_score = 0
+
 folder = os.path.dirname(os.path.abspath(sys.executable))
 high_score_file = os.path.join(folder, "high_score.txt")
-with open (high_score_file, "r") as file:
-        high_score = int(file.read())
+if os.path.exists(high_score_file):
+        with open (high_score_file, "r") as file:
+                high_score = int(file.read())
+
+else:
+        high_score = 0
+        
 
 high_score_text = tk.Label(
                                 area, 
@@ -260,7 +266,7 @@ def move():
                 if score > high_score:
                         high_score = score
 
-                        with open("high_score.txt", "w") as file:
+                        with open(high_score_file, "w") as file:
                                 file.write(str(high_score))
 
 
